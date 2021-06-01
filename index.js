@@ -57,9 +57,17 @@ function onStatesDropdownChanged() {
     
     citiesDropdown.options.length = 0;
     let selectedstatesDropdown = stateDropdown.value;
+    if (selectedstatesDropdown == "") {
+        let selectOneOption = document.createElement("option");
+        selectOneOption.textContent = "Pick A State First...";
+        selectOneOption.value = "";
+        citiesDropdown.appendChild(selectOneOption);
+        return;
+    }
+
     let matchingStateAbbr = cityStates.find(a => a.stateAbbr == selectedstatesDropdown);
     let selectOneOption = document.createElement("option");
-    selectOneOption.textContent = "Pick A State First";
+    selectOneOption.textContent = "Select One...";
     selectOneOption.value = "";
     citiesDropdown.appendChild(selectOneOption);
     for (let i = 0; i < matchingStateAbbr.cities.length; i++) {
@@ -82,8 +90,7 @@ function oncitiesDropdownChanged() {
     }
     let selectedStateIndex = stateDropdown.selectedIndex;
     let selectedState = stateDropdown.options[selectedStateIndex].text;
-    let message = "The " + selectedCity + " is in " + selectedState;
+    let message = selectedCity + " is in " + selectedState;
     
     messagePara.innerHTML = message;
-
 }
