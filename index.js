@@ -29,24 +29,23 @@ window.onload = function () {
 
 }
 
+
 function loadstatesDropdown() {
-    const loadstatesDropdown = document.getElementById("statesDropdown");
+    const statesDropdown = document.getElementById("statesDropdown");
     let selectOneOption = document.createElement("option");
     selectOneOption.textContent = "Select One...";
     selectOneOption.value = "";
-    loadstatesDropdown.appendChild(selectOneOption);
+    statesDropdown.appendChild(selectOneOption);
     for (let i = 0; i < cityStates.length; i++) {
         let theOption = document.createElement("option");
         theOption.textContent = cityStates[i].state;
         theOption.value = cityStates[i].stateAbbr;
-        loadstatesDropdown.appendChild(theOption);
+        statesDropdown.appendChild(theOption);
     }
 
-    const loadcitiesDropdown = document.getElementById("citiesDropdown");
-    selectOneOption = document.createElement("option");
-    selectOneOption.textContent = "Pick A State First";
-    selectOneOption.value = "";
-    loadcitiesDropdown.appendChild(selectOneOption);
+    ABC("Pick A State First...");
+    statesDropdown.selectedIndex = 1;  
+    onStatesDropdownChanged(); 
 }
 
 function onStatesDropdownChanged() {
@@ -58,10 +57,7 @@ function onStatesDropdownChanged() {
     citiesDropdown.options.length = 0;
     let selectedstatesDropdown = stateDropdown.value;
     if (selectedstatesDropdown == "") {
-        let selectOneOption = document.createElement("option");
-        selectOneOption.textContent = "Pick A State First...";
-        selectOneOption.value = "";
-        citiesDropdown.appendChild(selectOneOption);
+        ABC("Pick A State First...");
         return;
     }
 
@@ -93,4 +89,13 @@ function oncitiesDropdownChanged() {
     let message = selectedCity + " is in " + selectedState;
     
     messagePara.innerHTML = message;
+}
+
+
+function ABC(xyz) {
+    const citiesDropdown = document.getElementById("citiesDropdown");
+    let selectOneOption = document.createElement("option");
+    selectOneOption.textContent = xyz;
+    selectOneOption.value = "";
+    citiesDropdown.appendChild(selectOneOption);
 }
